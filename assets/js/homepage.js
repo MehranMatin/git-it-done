@@ -11,4 +11,4 @@ var getUserRepos = function(user) {
     });
 };
 
-getUserRepos('MehranMatin');
+getUserRepos('octocat');

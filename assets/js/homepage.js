@@ -1,6 +1,9 @@
-/* Form Handler */
+/* DOM elements */
 var userFormEl = document.querySelector('#user-form');
 var nameInputEl = document.querySelector('#username');
+var repoContainerEl = document.querySelector('#repos-container');
+var repoSearchTerm = document.querySelector('#repo-search-term');
+
 
 var formSubmitHandler = function(event) {
     // stops the browser from sending the form's input data to a URL
@@ -11,7 +14,7 @@ var formSubmitHandler = function(event) {
 
     // if there is in fact a value to username...
     if (username) {
-        // pass input element's value data as an argument
+        // pass input element's value data as an argument for search
         getUserRepos(username);
         // clear form input
         nameInputEl.value = '';
@@ -38,4 +41,8 @@ userFormEl.addEventListener('submit', formSubmitHandler);
 var displayRepos = function(repos, searchTerm) {
     console.log(repos);
     console.log(searchTerm);
+
+    // clear old content
+    repoContainerEl.textContent = '';
+    repoSearchTerm.textContent = searchTerm;
 };

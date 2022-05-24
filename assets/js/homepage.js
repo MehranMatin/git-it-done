@@ -6,7 +6,8 @@ var repoSearchTerm = document.querySelector('#repo-search-term');
 
 /* App Functions */
 var formSubmitHandler = function(event) {
-    // stops the browser from sending the form's input data to a URL
+    // prevent page from refreshing
+    // stops browser from automatically sending form's data to a URL
     event.preventDefault();
 
     // get value from input element
@@ -17,6 +18,7 @@ var formSubmitHandler = function(event) {
         // pass input element's value data as an argument for search
         getUserRepos(username);
         // clear form input
+        repoContainerEl.textContent = '';
         nameInputEl.value = '';
     } else {
         alert('Please enter a GitHub username');
@@ -27,12 +29,14 @@ var getUserRepos = function(user) {
     // format the github api url
     var apiUrl = 'https://api.github.com/users/' + user + '/repos';
 
-    // make a request to the url
+    // make a get request to the url
     fetch(apiUrl)
         .then(function(response) {
             // request was successful
             if (response.ok) {
+                console.log(response);
                 response.json().then(function(data) {
+                    console.log(data);
                     displayRepos(data, user);
                 });
             } else {
@@ -46,17 +50,12 @@ var getUserRepos = function(user) {
 };
 
 var displayRepos = function(repos, searchTerm) {
-    console.log(repos);
-    console.log(searchTerm);
-
     // check if api returned any repos
     if (repos.length === 0) {
         repoContainerEl.textContent = 'No repositories found.';
         return;
     }
 
-    // clear old content
-    repoContainerEl.textContent = '';
     repoSearchTerm.textContent = searchTerm;
 
     // loop over repos...
@@ -94,5 +93,5 @@ var displayRepos = function(repos, searchTerm) {
     }
 };
 
-/* Events */
+/* Event listeners to forms*/
 userFormEl.addEventListener('submit', formSubmitHandler);

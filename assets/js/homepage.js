@@ -83,7 +83,7 @@ var displayRepos = function(repos, searchTerm) {
         if (repos[i].open_issues_count > 0) {
             statusEl.innerHTML = "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
         } else {
-            statusEl.innerHTML = statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+            statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
         }
 
         // append to container
